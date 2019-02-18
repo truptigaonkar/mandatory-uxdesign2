@@ -1,39 +1,40 @@
-function getData(method, url) {
-    return new Promise(function (resolve, reject) {
-        var xhr = new XMLHttpRequest();
-        xhr.open(method, url);
-        xhr.onload = function () {
-            if (this.status >= 200 && this.status < 300) {
-                resolve(xhr.response);
-            } else {
-                reject({
-                    status: this.status,
-                    statusText: xhr.statusText
-                });
-            }
-        };
-        xhr.onerror = function () {
-            reject({
-                status: this.status,
-                statusText: xhr.statusText
-            });
-        };
-        xhr.send();
-    });
+let gamesPlayed = 0;
+let count = 1;
+
+const startButton = document.querySelector(".mds-body-button");
+const quizBody = document.querySelector(".mds-body");
+
+startButton.addEventListener ("click", () =>{
+    startButton.classList.add ("mds-display-none");
+    quizBody.dataset.type = "active"
+    getData()
+    .then (res => renderQuiz(res));
+})
+
+function getData (){
+    return fetch("https://opentdb.com/api.php?amount=10")
+   .then  (response => response.json())
+   .then (response => {return response})
+   .catch (error => console.error ("Error", error));
 }
-getData('GET', 'https://opentdb.com/api.php?amount=10').then(function (data) {
-    let parsedData = JSON.parse(data);
-    console.log(parsedData);
-    let output = '';
-    for (let i of parsedData.results) {
-        output += `<li>
-                    <h3>Question: ${i.question}</h3>
-                    <p>${i.correct_answer}</p>
-                    <p>${i.incorrect_answers}</p>
-                  </li>`;
+
+function renderQuiz (data){
+    //let answer = [];
+    let quizHeadline = document.createElement("h3");
+    quizHeadline.innerHTML = "Quiz "+(gamesPlayed+1);
+    quizBody.appendChild (quizHeadline);
+    let array = data.results;
+    for (let i = 0; i < array.length;i++){
+        let question = array[i].question;
+        let questionText = document.createElement("h2");
+        questionText.innerHTML = question;
+        quizBody.appendChild(questionText);
+        array[i].correct_answer,array[i].incorrect_answers;
+        count ++;
     }
-    document.querySelector('.container').innerHTML = output;
-    console.log(output);
-}).catch(function (err) {
-    console.log(err);
-});
+    let doneButton = document.createElement("button");
+    doneButton.className ="mds-body-doneButton";
+    doneButton.innerHTML = "Done";
+    quizBody.appendChild(doneButton);
+} 
+
