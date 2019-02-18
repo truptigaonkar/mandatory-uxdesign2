@@ -4,8 +4,13 @@
 ul{
     list-style: none;
 }
-li {
+li{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
+/* .numberQuestion{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+} */

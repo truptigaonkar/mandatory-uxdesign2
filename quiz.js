@@ -24,16 +24,20 @@ function renderQuiz (data){
     quizHeadline.innerHTML = "Quiz "+(gamesPlayed+1);
     quizBody.appendChild (quizHeadline);
     let array = data.results;
-    for (let i = 0; i < array.length;i++){
-        // for(let i of array){
-        // let h3 = document.createElement("h3");
-        // let number = array.indexOf(i) + 1; //question number
-        // h3.textContent = "Q." + number;
-        
+    console.log(array);
+    for (let i = 0; i < array.length; i++){
+
+        // Giving number to each section
+        let numberQuestion = document.createElement("h3");
+        console.log(numberQuestion);
+        //numberQuestion.className = "numberQuestion";
+        numberQuestion.textContent = "Q."  +(i+1);
+        quizBody.appendChild(numberQuestion);
+
         let question = array[i].question;
         let questionText = document.createElement("h2");
         questionText.innerHTML = question;
-        //quizBody.appendChild(h3);
+        
         quizBody.appendChild(questionText);
         answer = randomAnswer(array[i].correct_answer,array[i].incorrect_answers);
         renderAnswer(answer);
@@ -71,24 +75,23 @@ function renderAnswer (answer){
     }
     quizBody.scrollIntoView();
 }
-function giveAttributes(element,obj){
-    for (let prop in obj){
-        if(obj.hasOwnProperty(prop)){
-            element[prop] = obj[prop];
+function giveAttributes(element,object){
+    for (let property in object){
+        if(object.hasOwnProperty(property)){
+            element[property] = object[property];
         }
     }
 }
 
-function randomAnswer(correct,wrong){
-    wrong.push(correct);
-        let j,x,i;
-        for (i = wrong.length -1; i > 0; i--){
-            j = Math.floor(Math.random() * (i+1))
-            x=wrong[i];
-            wrong[i] = wrong[j];
-            wrong[j] = x;
-            return wrong;
+function randomAnswer(right,fail){
+    fail.push(right);
+        for (let x = fail.length -1; x > 0; x--){
+            let y = Math.floor(Math.random() * (x+1))
+            let z=fail[x];
+            fail[z] = fail[y];
+            fail[y] = z;
+            return fail;
         }
-    return wrong;
+    return fail;
 }
 
