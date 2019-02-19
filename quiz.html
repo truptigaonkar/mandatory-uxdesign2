@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>mandatory-uxdesign2 - Quiz Application</title>
@@ -7,27 +8,67 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="quiz.css" />
-    <script src="quiz.js" defer></script>
 </head>
+
 <body>
     <div class="mds-border">
+        <div class="mds-menubar">
+            <div class="mds-menubar-title">
+                <h2 class="mds-menubar-title-text">Quiz Master</h2>
+                <h4 class="mds-menubar-title-info"> Become the master of quizzes </h4>
+            </div>
+            <div class="mds-menubar-list">
+                <div class="mds-menubar-list-item">Game screen</div>
+                <div class="mds-menubar-list-item">Stats</div>
+                <div class="mds-menubar-list-item">About this app</div>
+            </div>
+        </div>
         <div class="mds-container">
             <header class="mds-header">
+                <i class="mds-header-icon material-icons" data-click="active">menu</i>
                 <hi class="mds-header-text">Quiz Master</hi>
             </header>
             <div class="mds-scroll">
                 <main class="mds-body" data-type="inactive"></main>
+                <div class="mds-about mds-display-none">
+                    <p class="mds-about-text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, harum doloribus numquam,
+                        incidunt autem temporibus sint aliquid suscipit accusantium voluptates odio laudantium quod quas
+                        animi corrupti ullam maiores repudiandae sequi.
+                    </p>
+                </div>
+                <div class="mds-stats mds-display-none">
+                    <div class="mds-stats-box">
+                        <p class="mds-stats-title">GAMES PLAYED</p>
+                        <h3 class="mds-stats-text played"></h3>
+                    </div>
+                    <div class="mds-stats-box">
+                        <p class="mds-stats-title">CORRECT ANSWERS</p>
+                        <h3 class="mds-stats-text correct"></h3>
+                    </div>
+                    <div class="mds-stats-box">
+                        <p class="mds-stats-title">INCORRECT ANSWERS</p>
+                        <h3 class="mds-stats-text incorrect"></h3>
+                    </div>
+                    <div class="mds-stats-box">
+                        <p class="mds-stats-title">CORRECT PERCENTAGE</p>
+                        <h3 class="mds-stats-text percentage"></h3>
+                    </div>
+                </div>
             </div>
             <button class="mds-body-button">START QUIZ</button>
             <div class="mds-popup mds-display-none">
                 <h6 class="mds-popup-title--text">Congratulations!</h6>
                 <p class="mds-popup-supporting--text"></p>
                 <div class="mds-choice">
-                    <span class="mds-choice-button re-start" style="font-weight: bold; color:lightslategray">RE-START</span>
+                    <span class="mds-choice-button re-start"
+                        style="font-weight: bold; color:lightslategray">RE-START</span>
                     <span class="mds-choice-button close" style="font-weight: bold; color:lightslategray">CLOSE</span>
                 </div>
             </div>
         </div>
     </div>
+    <script src="quiz.js" defer></script>
 </body>
+
 </html>
