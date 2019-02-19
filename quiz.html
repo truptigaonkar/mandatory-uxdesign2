@@ -1,18 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>mandatory-uxdesign2 - Quiz Application</title>
-    <link rel="stylesheet" href="quiz.css">
+    <meta charset="utf-8" />
+    <title>Quiz</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="quiz.css" />
+    <script src="quiz.js" defer></script>
 </head>
-
 <body>
-    <main class="mds-body" data-type="inactive">
-        <button class="mds-body-button">Start Quiz</button>
-    </main>
-    <script src="quiz.js"></script>
+    <div class="mds-border">
+        <div class="mds-container">
+            <header class="mds-header">
+                <hi class="mds-header-text">Quiz Master</hi>
+            </header>
+            <div class="mds-scroll">
+                <main class="mds-body" data-type="inactive"></main>
+            </div>
+            <button class="mds-body-button">Start Quiz</button>
+            <div class="mds-popup mds-display-none">
+                <h6 class="mds-popup-title--text">Congratulations</h6>
+                <p class="mds-popup-supporting--text"></p>
+                <div class="mds-choise">
+                    <span class="mds-choise-button re-start">RE-START</span>
+                    <span class="mds-choise-button close">CLOSE</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
