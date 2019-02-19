@@ -43,12 +43,14 @@ function renderQuiz(data) {
 
          // Giving number to each question
          let numberQuestion = document.createElement("h3");
-         console.log(numberQuestion);
-         numberQuestion.textContent = "Q."  +(i+1);
+         //console.log(numberQuestion);
+         numberQuestion.className = "numberClass";
+         numberQuestion.textContent = "Q"  +(i+1) +".";
          quizBody.appendChild(numberQuestion);
 
         let question = array[i].question;
         let questionText = document.createElement("h2");
+        questionText.className = "questionClass";
         questionText.innerHTML = question;
         quizBody.appendChild(questionText);
         answer = randomAnswer(array[i].correct_answer, array[i].incorrect_answers);
@@ -57,7 +59,7 @@ function renderQuiz(data) {
     }
     let doneButton = document.createElement("button");
     doneButton.className = "mds-body-doneButton";
-    doneButton.innerHTML = "Done";
+    doneButton.innerHTML = "DONE";
     quizBody.appendChild(doneButton);
     doneButton.addEventListener("click", checkanswer)
 }
@@ -130,7 +132,7 @@ function popUpFunction() {
     popUpContainer.classList.remove("mds-display-none")
     container.style.backgroundColor = "#ADADAD";
     let dialogtext = document.querySelector(".mds-popup-supporting--text");
-    dialogtext.innerHTML = "You answered " + numOfCorrectAnswer + "/10 questions correct"
+    dialogtext.innerHTML = "You answered " + numOfCorrectAnswer + "/10 questions correct!"
     let closeButton = document.querySelector(".close")
     let reStartButton = document.querySelector(".re-start");
     closeButton.addEventListener("click", closeFunction);
