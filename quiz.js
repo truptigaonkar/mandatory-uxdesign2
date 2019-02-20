@@ -1,14 +1,14 @@
-const startButton = document.querySelector(".mds-body-button");
-const quizBody = document.querySelector(".mds-body");
-const popUpContainer = document.querySelector(".mds-popup");
+const startQuizBtn = document.querySelector(".mds-start-button");
+const quizBody = document.querySelector(".mds-scroll-main");
+const modalContainer = document.querySelector(".mds-modal");
 const container = document.querySelector(".mds-container");
 
 // Menu items and subitems
-const iconButton = document.querySelector(".mds-header-icon ");
+const drawerMenuBtn = document.querySelector(".mds-menu-icon ");
 const menuBar = document.querySelector(".mds-menubar");
-const menubarListItem = document.querySelectorAll(".mds-menubar-list-item");
-const statsContainer = document.querySelector(".mds-stats");
-const aboutContainer = document.querySelector(".mds-about");
+const menubarListitem = document.querySelectorAll(".mds-menubar-listitem");
+const statsScreen = document.querySelector(".mds-stats");
+const aboutScreen = document.querySelector(".mds-about");
 let headTitle = document.querySelector(".mds-header-text");
 let stats = {
     gamesplayed: "",
@@ -28,22 +28,12 @@ let playerAnswer = [];
 let numOfCorrectAnswer = 0;
 
 //------------Quiz screen------------// 
-
 // Event listner for START QUIZ button
-startButton.addEventListener("click", () => {
-    startButton.classList.add("mds-display-none");
+startQuizBtn.addEventListener("click", () => {
+    startQuizBtn.classList.add("mds-display-none");
     quizBody.dataset.type = "active"
     getRequest();
-
 })
-
-/* //----- Anothter way of fetching data -------//
-function getRequest() {
-    return fetch("https://opentdb.com/api.php?amount=10")
-        .then(response => response.json())
-        .then(response => { return response })
-        .catch(error => console.error("Error", error));
-} */
 
 // Fetching data from api
 function getRequest() {
@@ -53,13 +43,14 @@ function getRequest() {
     xml.send();
 }
 
+// Parsing data
 function getParse() {
     let parsedData = JSON.parse(this.responseText);
     console.log(parsedData.results);
     renderQuiz(parsedData);
 }
 
-// Rendering questions only
+// Rendering list of questions only
 function renderQuiz(parsedData) {
     let answer = [];
     let quizHeadline = document.createElement("h3");
@@ -85,73 +76,66 @@ function renderQuiz(parsedData) {
         count++;
     }
     let doneButton = document.createElement("button");
-    doneButton.className = "mds-body-doneButton";
+    doneButton.className = "mds-done-button";
     doneButton.innerHTML = "DONE";
     quizBody.appendChild(doneButton);
-    doneButton.addEventListener("click", checkanswer)
+    doneButton.addEventListener("click", checkAnswer)
 }
 
-// Rendering answers with radio button
+// Rendering answers to each question with radio button
 function renderAnswer(answer) {
-    let ulTag = document.createElement("ul");
-    quizBody.appendChild(ulTag);
+    let newUlTag = document.createElement("ul");
+    quizBody.appendChild(newUlTag);
     for (let i = 0; i < answer.length; i++) {
-        let liTag = document.createElement("li");
-        let inputTag = document.createElement("input");
-        let spanTag1 = document.createElement("span");
-        let spanTag2 = document.createElement("span");
-        let pTag = document.createElement("p");
-        giveAttributes(inputTag, {
-            type: "radio",
-            name: "radio" + count,
-            value: answer[i],
-        });
-        inputTag.className = "mds-radio-input"
-        spanTag1.className = "mds-radio-border"
-        spanTag2.className = "mds-radio-toogle"
-        pTag.innerHTML = answer[i];
-        ulTag.appendChild(liTag);
-        liTag.appendChild(inputTag);
-        liTag.appendChild(spanTag1);
-        liTag.appendChild(spanTag2);
-        liTag.appendChild(pTag);
+        let newLiTag = document.createElement("li");
+        let newInputTag = document.createElement("input");
+        let newSpanTag1 = document.createElement("span");
+        let newSpanTag2 = document.createElement("span");
+        let newPTag = document.createElement("p");
+        // Setting type radio attributes
+        newInputTag.setAttribute("type", "radio");
+        newInputTag.setAttribute("name", count);
+        newInputTag.setAttribute("value", answer[i]);
+        newInputTag.setAttribute("required", "");
+        newInputTag.className = "mds-radio-input"
+        newSpanTag1.className = "mds-radio-border"
+        newSpanTag2.className = "mds-radio-toogle"
+        newPTag.innerHTML = answer[i];
+        newUlTag.appendChild(newLiTag);
+        newLiTag.appendChild(newInputTag);
+        newLiTag.appendChild(newSpanTag1);
+        newLiTag.appendChild(newSpanTag2);
+        newLiTag.appendChild(newPTag);
     }
     quizBody.scrollIntoView();
-}
-
-function giveAttributes(element, obj) {
-    for (let prop in obj) {
-        if (obj.hasOwnProperty(prop)) {
-            element[prop] = obj[prop];
-        }
-    }
 }
 
 // Helps you to get correct list of answers with radio button
 function randomAnswer(correct, wrong) {
     SaveCorrectAnswer(correct);
     wrong.push(correct);
-    let j, x, i;
-    for (i = wrong.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1))
-        x = wrong[i];
-        wrong[i] = wrong[j];
-        wrong[j] = x;
+    for (let x = wrong.length - 1; x > 0; x--) {
+        let y = Math.floor(Math.random() * (x + 1))
+        let z = wrong[x];
+        wrong[x] = wrong[y];
+        wrong[y] = z;
         return wrong;
     }
     return wrong;
 }
 
+// Pushing all correct answers to page
 function SaveCorrectAnswer(correct) {
     allCorrectAnswer.push(correct);
 }
 
-function checkanswer() {
-    let inputTags = document.querySelectorAll("input");
+// Checking answers if its right or wrong
+function checkAnswer() {
+    let newInputTags = document.querySelectorAll("input");
     numOfCorrectAnswer = 0;
-    for (let i = 0; i < inputTags.length; i++) {
-        if (inputTags[i].type === "radio" && inputTags[i].checked) {
-            playerAnswer.push(inputTags[i].value);
+    for (let i = 0; i < newInputTags.length; i++) {
+        if (newInputTags[i].type === "radio" && newInputTags[i].checked) {
+            playerAnswer.push(newInputTags[i].value);
         }
         else { continue };
     }
@@ -160,29 +144,29 @@ function checkanswer() {
             numOfCorrectAnswer++;
         }
     }
-    popUpFunction()
+    modalFunction()
 }
 //------------End of Quiz screen------------//
 
-//------------Popup------------// 
-function popUpFunction() {
-    popUpContainer.classList.remove("mds-display-none")
+//------------Modal------------// 
+function modalFunction() {
+    modalContainer.classList.remove("mds-display-none")
     container.style.backgroundColor = "#ADADAD";
-    let dialogtext = document.querySelector(".mds-popup-supporting--text");
+    let dialogtext = document.querySelector(".mds-modal-supporting--text");
     dialogtext.innerHTML = "You answered " + numOfCorrectAnswer + "/10 questions correct!"
     let closeButton = document.querySelector(".close")
-    let reStartButton = document.querySelector(".re-start");
-    closeButton.addEventListener("click", closeFunction);
-    reStartButton.addEventListener("click", reStartFunction)
+    let restartQuizBtn = document.querySelector(".re-start");
+    closeButton.addEventListener("click", closeModalFunction);
+    restartQuizBtn.addEventListener("click", restartModalFunction)
 }
 
-function closeFunction() {
+function closeModalFunction() {
     clearHtmlFunction()
-    iconButton.dataset.click = "inactive"
-    startButton.classList.remove("mds-display-none")
+    drawerMenuBtn.dataset.click = "inactive"
+    startQuizBtn.classList.remove("mds-display-none")
 
 }
-function reStartFunction() {
+function restartModalFunction() {
     savePlayerStats();
     numOfCorrectAnswer = 0;
     clearHtmlFunction();
@@ -190,14 +174,14 @@ function reStartFunction() {
     playerAnswer = [];
     getRequest();
 }
-//------------End of Popup------------// 
+//------------End of Modal------------// 
 
 // Clear all html to go back to the beginning
 function clearHtmlFunction() {
     while (quizBody.firstChild) {
         quizBody.removeChild(quizBody.firstChild);
     }
-    popUpContainer.classList.add("mds-display-none");
+    modalContainer.classList.add("mds-display-none");
     container.style.backgroundColor = "#fff";
 }
 
@@ -218,18 +202,18 @@ function savePlayerStats() {
 }
 
 //------------Menu bar------------// 
-iconButton.addEventListener("click", iconFunction);
-function iconFunction() {
-    if (iconButton.dataset.click === "active") {
-        statsContainer.classList.add("mds-display-none");
+drawerMenuBtn.addEventListener("click", drawerMenuFunction);
+function drawerMenuFunction() {
+    if (drawerMenuBtn.dataset.click === "active") {
+        statsScreen.classList.add("mds-display-none");
         menuBar.style.width = "640px";
         quizBody.classList.add("mds-display-none")
-        startButton.classList.add("mds-display-none");
-        aboutContainer.classList.add("mds-display-none")
-        iconButton.dataset.click = "inactive"
+        startQuizBtn.classList.add("mds-display-none");
+        aboutScreen.classList.add("mds-display-none")
+        drawerMenuBtn.dataset.click = "inactive"
         container.style.backgroundColor = "#ADADAD";
     }
-    else if (iconButton.dataset.click === "inactive") {
+    else if (drawerMenuBtn.dataset.click === "inactive") {
         if (headTitle.textContent === "Stats") {
             statsFunction();
         }
@@ -240,21 +224,21 @@ function iconFunction() {
             menuBar.style.width = "0px";
             quizBody.classList.remove("mds-display-none")
             if (quizBody.dataset.type != "active") {
-                startButton.classList.remove("mds-display-none");
+                startQuizBtn.classList.remove("mds-display-none");
             }
             container.style.backgroundColor = "#fff";
-            iconButton.dataset.click = "active"
+            drawerMenuBtn.dataset.click = "active"
         }
     }
 
 }
-for (let bar of menubarListItem) {
+for (let bar of menubarListitem) {
     bar.addEventListener("click", function (e) {
         if (e.target.innerHTML === "Game screen") {
-            statsContainer.classList.add("mds-display-none");
-            aboutContainer.classList.add("mds-display-none")
+            statsScreen.classList.add("mds-display-none");
+            aboutScreen.classList.add("mds-display-none")
             headTitle.innerHTML = "Quiz Master";
-            iconFunction();
+            drawerMenuFunction();
         }
         else if (e.target.innerHTML === "Stats") {
             statsFunction();
@@ -267,12 +251,12 @@ for (let bar of menubarListItem) {
 
 function statsFunction() {
     quizBody.classList.add("mds-display-none")
-    startButton.classList.add("mds-display-none");
-    aboutContainer.classList.add("mds-display-none")
+    startQuizBtn.classList.add("mds-display-none");
+    aboutScreen.classList.add("mds-display-none")
     container.style.backgroundColor = "#fff";
-    iconButton.dataset.click = "active"
+    drawerMenuBtn.dataset.click = "active"
     headTitle.innerHTML = "Stats";
-    statsContainer.classList.remove("mds-display-none")
+    statsScreen.classList.remove("mds-display-none")
     renderStats();
     menuBar.style.width = "0px";
 }
@@ -286,11 +270,11 @@ function renderStats() {
 function aboutFunction() {
     headTitle.innerHTML = "About this app";
     quizBody.classList.add("mds-display-none")
-    iconButton.dataset.click = "active"
-    startButton.classList.add("mds-display-none");
+    drawerMenuBtn.dataset.click = "active"
+    startQuizBtn.classList.add("mds-display-none");
     container.style.backgroundColor = "#fff";
     menuBar.style.width = "0px";
-    aboutContainer.classList.remove("mds-display-none")
+    aboutScreen.classList.remove("mds-display-none")
 }
 //------------End of Menu bar------------//
 

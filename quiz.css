@@ -28,7 +28,7 @@ body{
     display: flex;
     align-items: center;
 }
-.mds-header-icon{
+.mds-menu-icon{
     cursor: pointer;
     font-weight: bold;
     font-size: 24px;
@@ -46,12 +46,12 @@ body{
     height: 620px;
     overflow: auto;
 }
-.mds-body{
+.mds-scroll-main{
     position: relative;
     width: 100%;
     height: 100%;
 }
-.mds-body-button{
+.mds-start-button{
     position: absolute;
     top: 57%;
     left: 33%;
@@ -65,7 +65,7 @@ body{
     text-decoration: none;
     cursor: pointer;
 }
-.mds-body-doneButton{
+.mds-done-button{
     left: 40%;
     background-color: gray;
     color: black;
@@ -143,7 +143,7 @@ p {
 .mds-radio-input:checked ~.mds-radio-toogle{
     opacity: 1;
 }
-.mds-popup{
+.mds-modal{
     height: 180px;
     width: 280px;
     background-color: #fff;
@@ -152,13 +152,13 @@ p {
     top: 263px;
     left: 38px;
 }
-.mds-popup-title--text{
+.mds-modal-title--text{
     font-size: 21px;
     margin-top: 27px;
     margin-left: 28px;
     margin-bottom: 0px;
 }
-.mds-popup-supporting--text{
+.mds-modal-supporting--text{
     font-size: 16px;
     color: lightslategray;
     margin-left: 31px;
@@ -193,7 +193,7 @@ p {
     width: 100%;
     height: 500px;
 }
-.mds-menubar-list-item{
+.mds-menubar-listitem{
     width: 100%;
     height: 80px;
     background-color: #fff;
@@ -213,7 +213,7 @@ p {
     padding-left: 25px;
     margin-top: 8px;
 }
-.mds-menubar-list-item:hover{
+.mds-menubar-listitem:hover{
     background-color: #1D2029;
     color:#fff;
 }
