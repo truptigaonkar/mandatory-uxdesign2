@@ -2,6 +2,7 @@ body{
     background-color: #f4f4f4e1;
     font-family: 'Roboto', sans-serif;
     margin-top: 42px;
+    font-size: 16px;
 }
 .mds-border{
     height: 800px;
@@ -10,21 +11,21 @@ body{
     align-items: center;
     display: flex;
     background-color: gray;
-    border-radius: 2%;
+    border-radius: 1%;
 }
 .mds-container{
     position:relative;
     background-color: #fff;
-    height: 770px;
+    height: 780px;
     width: 380px;
     margin: 0 auto;
     transition: 0.5s;
-    border-radius: 2%;
+    border-radius: 1%;
 }
 .mds-header{
     width: 100%;
     height: 80px;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid gray;
     display: flex;
     align-items: center;
 }
@@ -43,7 +44,7 @@ body{
 }
 .mds-scroll{
     width: 100%;
-    height: 620px;
+    height: 670px;
     overflow: auto;
 }
 .mds-scroll-main{
@@ -65,6 +66,10 @@ body{
     text-decoration: none;
     cursor: pointer;
 }
+.mds-start-button:hover{
+    background-color: lightslategray;
+    color: white;
+}
 .mds-done-button{
     left: 40%;
     background-color: gray;
@@ -79,6 +84,10 @@ body{
     cursor: pointer;
     margin-top: 20px;
     margin-bottom: 42px;
+}
+.mds-done-button:hover{
+    background-color: lightslategray;
+    color: white;
 }
 .mds-display-none{
     display: none;
@@ -100,11 +109,18 @@ li {
     flex-direction: row;
     align-items: center;
 }
-.numberClass, .questionClass{
+.numberClass, .categoryClass{
     display: inline;
+    font-size: 16px;
 }
-p {
+.categoryClass{
+    text-decoration: underline;
+    font-size: 16px;
+    font-weight: bold;
+}
+p{
     margin-left: 46px;
+    font-size: 16px;
     font-weight: bold;
 }
 .mds-radio-input{
@@ -175,34 +191,43 @@ p {
     cursor: pointer;
 }
 .mds-menubar{
-    height: 700px;
+    height: 780px;
     width: 0px;
     transition: .5s;
     top: 0px;
     z-index: 10000;
     overflow-x: hidden;
     background-color: #fff;
-
 }
 .mds-menubar-title{
     width: 100%;
     height: 200px;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid gray;
 }
 .mds-menubar-list{
     width: 100%;
-    height: 500px;
+    height: 100px;
 }
 .mds-menubar-listitem{
     width: 100%;
-    height: 80px;
-    background-color: #fff;
+    height: 60px;
     padding-left: 25px;
     display: flex;
     align-items: center;
     cursor: pointer;
+    font-weight: bold;
 }
+/* .mds-meunubar-radio{
+    overflow:auto;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid black;
+} */
 
+.mds-menubar-listitem:hover{
+    background-color: lightgray; 
+}
 .mds-menubar-title-text{
     font-size: 20px;
     padding-left: 25px;
@@ -212,10 +237,6 @@ p {
 .mds-menubar-title-info{
     padding-left: 25px;
     margin-top: 8px;
-}
-.mds-menubar-listitem:hover{
-    background-color: #1D2029;
-    color:#fff;
 }
 
 .mds-stats{

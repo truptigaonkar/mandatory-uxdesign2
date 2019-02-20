@@ -27,14 +27,16 @@ let allCorrectAnswer = [];
 let playerAnswer = [];
 let numOfCorrectAnswer = 0;
 
-//------------Quiz screen------------// 
+//------------Main screen------------// 
 // Event listner for START QUIZ button
 startQuizBtn.addEventListener("click", () => {
     startQuizBtn.classList.add("mds-display-none");
     quizBody.dataset.type = "active"
     getRequest();
 })
+//------------End of Main screen------------//
 
+//------------Quiz screen------------// 
 // Fetching data from api
 function getRequest() {
     let xml = new XMLHttpRequest
@@ -55,17 +57,26 @@ function renderQuiz(parsedData) {
     let answer = [];
     let quizHeadline = document.createElement("h3");
     quizHeadline.innerHTML = "Quiz " + (gamesPlayed + 1);
+    quizHeadline.style.color = "#003366";
     quizBody.appendChild(quizHeadline);
     let array = parsedData.results;
     for (let i = 0; i < array.length; i++) {
 
-        // Giving number to each question
+        // Display number to each question
         let numberQuestion = document.createElement("h3");
         //console.log(numberQuestion);
         numberQuestion.className = "numberClass";
         numberQuestion.textContent = "Q" + (i + 1) + ".";
         quizBody.appendChild(numberQuestion);
 
+        // Display category
+        let category = array[i].category;
+        let categoryText = document.createElement("h3");
+        categoryText.className = "categoryClass";
+        categoryText.innerHTML = category;
+        quizBody.appendChild(categoryText);
+
+        // Display questions
         let question = array[i].question;
         let questionText = document.createElement("h2");
         questionText.className = "questionClass";
@@ -201,12 +212,12 @@ function savePlayerStats() {
     numOfCorrectAnswer = 0;
 }
 
-//------------Menu bar------------// 
+//------------Drawer Screen ------------// 
 drawerMenuBtn.addEventListener("click", drawerMenuFunction);
 function drawerMenuFunction() {
     if (drawerMenuBtn.dataset.click === "active") {
         statsScreen.classList.add("mds-display-none");
-        menuBar.style.width = "640px";
+        menuBar.style.width = "700px";
         quizBody.classList.add("mds-display-none")
         startQuizBtn.classList.add("mds-display-none");
         aboutScreen.classList.add("mds-display-none")
@@ -248,7 +259,9 @@ for (let bar of menubarListitem) {
         }
     })
 }
+//------------End of Drawer Screen ------------// 
 
+//------------Stats screen ------------// 
 function statsFunction() {
     quizBody.classList.add("mds-display-none")
     startQuizBtn.classList.add("mds-display-none");
@@ -266,7 +279,9 @@ function renderStats() {
     document.querySelector(".incorrect").innerHTML = (stats.incorrectanswer);
     document.querySelector(".percentage").innerHTML = (stats.correctpercentage) * 100 + "%";
 }
+//------------End of Stats screen ------------//
 
+//------------About screen ------------//
 function aboutFunction() {
     headTitle.innerHTML = "About this app";
     quizBody.classList.add("mds-display-none")
@@ -276,6 +291,6 @@ function aboutFunction() {
     menuBar.style.width = "0px";
     aboutScreen.classList.remove("mds-display-none")
 }
-//------------End of Menu bar------------//
+//------------End of About screen ------------//
 
 
