@@ -4,9 +4,9 @@ body{
     margin-top: 42px;
     font-size: 16px;
 }
-.mds-border{
+.mds-outline{
     height: 800px;
-    width: 400px;
+    width: 500px;
     margin: 0 auto;
     align-items: center;
     display: flex;
@@ -17,7 +17,7 @@ body{
     position:relative;
     background-color: #fff;
     height: 780px;
-    width: 380px;
+    width: 480px;
     margin: 0 auto;
     transition: 0.5s;
     border-radius: 1%;
@@ -55,7 +55,7 @@ body{
 .mds-start-button{
     position: absolute;
     top: 57%;
-    left: 33%;
+    left: 37%;
     background-color: gray;
     color:black;
     font-weight: bold;
@@ -71,7 +71,7 @@ body{
     color: white;
 }
 .mds-done-button{
-    left: 40%;
+    left: 42%;
     background-color: gray;
     color: black;
     font-weight: bold;
@@ -168,28 +168,29 @@ p{
     top: 263px;
     left: 38px;
 }
-.mds-modal-title--text{
+.mds-modal-title{
     font-size: 21px;
     margin-top: 27px;
     margin-left: 28px;
     margin-bottom: 0px;
 }
-.mds-modal-supporting--text{
+.mds-modal-description{
     font-size: 16px;
     color: lightslategray;
     margin-left: 31px;
     margin-top: 17px;
 }
-.mds-choice{
+.mds-modalChoice{
     display: flex;
     height: 50px;
     justify-content: flex-end;
 }
-.mds-choice-button{
-    margin-right: 38px;
+.mds-modalChoice-restartBtn, .mds-modalChoice-closeBtn{
+    margin-right: 20px;
     margin-top: 13px;
     cursor: pointer;
 }
+
 .mds-menubar{
     height: 780px;
     width: 0px;

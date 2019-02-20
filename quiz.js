@@ -59,8 +59,8 @@ function renderQuiz(parsedData) {
     quizHeadline.innerHTML = "Quiz " + (gamesPlayed + 1);
     quizHeadline.style.color = "#003366";
     quizBody.appendChild(quizHeadline);
-    let array = parsedData.results;
-    for (let i = 0; i < array.length; i++) {
+    let arrayData = parsedData.results;
+    for (let i = 0; i < arrayData.length; i++) {
 
         // Display number to each question
         let numberQuestion = document.createElement("h3");
@@ -70,19 +70,19 @@ function renderQuiz(parsedData) {
         quizBody.appendChild(numberQuestion);
 
         // Display category
-        let category = array[i].category;
+        let category = arrayData[i].category;
         let categoryText = document.createElement("h3");
         categoryText.className = "categoryClass";
         categoryText.innerHTML = category;
         quizBody.appendChild(categoryText);
 
         // Display questions
-        let question = array[i].question;
+        let question = arrayData[i].question;
         let questionText = document.createElement("h2");
         questionText.className = "questionClass";
         questionText.innerHTML = question;
         quizBody.appendChild(questionText);
-        answer = randomAnswer(array[i].correct_answer, array[i].incorrect_answers);
+        answer = randomAnswer(arrayData[i].correct_answer, arrayData[i].incorrect_answers);
         renderAnswer(answer);
         count++;
     }
@@ -163,10 +163,10 @@ function checkAnswer() {
 function modalFunction() {
     modalContainer.classList.remove("mds-display-none")
     container.style.backgroundColor = "#ADADAD";
-    let dialogtext = document.querySelector(".mds-modal-supporting--text");
+    let dialogtext = document.querySelector(".mds-modal-description");
     dialogtext.innerHTML = "You answered " + numOfCorrectAnswer + "/10 questions correct!"
-    let closeButton = document.querySelector(".close")
-    let restartQuizBtn = document.querySelector(".re-start");
+    let closeButton = document.querySelector(".mds-modalChoice-closeBtn")
+    let restartQuizBtn = document.querySelector(".mds-modalChoice-restartBtn");
     closeButton.addEventListener("click", closeModalFunction);
     restartQuizBtn.addEventListener("click", restartModalFunction)
 }
@@ -187,13 +187,13 @@ function restartModalFunction() {
 }
 //------------End of Modal------------// 
 
-// Clear all html to go back to the beginning
+// Clear all html to go back to quiz screen after clicking RE-START and CLOSE button from modal
 function clearHtmlFunction() {
     while (quizBody.firstChild) {
         quizBody.removeChild(quizBody.firstChild);
     }
     modalContainer.classList.add("mds-display-none");
-    container.style.backgroundColor = "#fff";
+    container.style.backgroundColor = "#fff"; // Change the color white because after clicking RE-START and CLOSE button you get the gray screen
 }
 
 // Save stats from game in a object.
@@ -274,10 +274,10 @@ function statsFunction() {
     menuBar.style.width = "0px";
 }
 function renderStats() {
-    document.querySelector(".played").innerHTML = (stats.gamesplayed);
-    document.querySelector(".correct").innerHTML = (stats.correctanswers);
-    document.querySelector(".incorrect").innerHTML = (stats.incorrectanswer);
-    document.querySelector(".percentage").innerHTML = (stats.correctpercentage) * 100 + "%";
+    document.querySelector(".mds-stats-text--played").innerHTML = (stats.gamesplayed);
+    document.querySelector(".mds-stats-text--correct").innerHTML = (stats.correctanswers);
+    document.querySelector(".mds-stats-text--incorrect").innerHTML = (stats.incorrectanswer);
+    document.querySelector(".mds-stats-text--percentage").innerHTML = (stats.correctpercentage) * 100 + "%";
 }
 //------------End of Stats screen ------------//
 

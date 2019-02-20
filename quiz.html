@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>mandatory-uxdesign2 - Quiz Application</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -11,7 +13,7 @@
 </head>
 
 <body>
-    <div class="mds-border">
+    <div class="mds-outline">
         <div class="mds-menubar">
             <div class="mds-menubar-title">
                 <h2 class="mds-menubar-title-text">Quiz Master</h2>
@@ -41,30 +43,30 @@
                 <div class="mds-stats mds-display-none">
                     <div class="mds-stats-box">
                         <p class="mds-stats-title">GAMES PLAYED</p>
-                        <h3 class="mds-stats-text played"></h3>
+                        <h3 class="mds-stats-text mds-stats-text--played"></h3>
                     </div>
                     <div class="mds-stats-box">
                         <p class="mds-stats-title">CORRECT ANSWERS</p>
-                        <h3 class="mds-stats-text correct"></h3>
+                        <h3 class="mds-stats-text mds-stats-text--correct"></h3>
                     </div>
                     <div class="mds-stats-box">
                         <p class="mds-stats-title">INCORRECT ANSWERS</p>
-                        <h3 class="mds-stats-text incorrect"></h3>
+                        <h3 class="mds-stats-text mds-stats-text--incorrect"></h3>
                     </div>
                     <div class="mds-stats-box">
                         <p class="mds-stats-title">CORRECT PERCENTAGE</p>
-                        <h3 class="mds-stats-text percentage"></h3>
+                        <h3 class="mds-stats-text mds-stats-text--percentage"></h3>
                     </div>
                 </div>
             </div>
             <button class="mds-start-button">START QUIZ</button>
             <div class="mds-modal mds-display-none">
-                <h6 class="mds-modal-title--text">Congratulations!</h6>
-                <p class="mds-modal-supporting--text"></p>
-                <div class="mds-choice">
-                    <span class="mds-choice-button re-start"
+                <h6 class="mds-modal-title">Congratulations!</h6>
+                <p class="mds-modal-description"></p>
+                <div class="mds-modalChoice">
+                    <span class="mds-modalChoice-restartBtn"
                         style="font-weight: bold; color:lightslategray">RE-START</span>
-                    <span class="mds-choice-button close" style="font-weight: bold; color:lightslategray">CLOSE</span>
+                    <span class="mds-modalChoice-closeBtn" style="font-weight: bold; color:lightslategray">CLOSE</span>
                 </div>
             </div>
         </div>
