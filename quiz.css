@@ -199,7 +199,7 @@ p{
     color: #003366;
 }
 
-.mds-menubar{
+.mds-drawermenubar{
     height: 780px;
     width: 0px;
     transition: .5s;
@@ -208,16 +208,16 @@ p{
     overflow-x: hidden;
     background-color: #fff;
 }
-.mds-menubar-title{
+.mds-drawermenubar-title{
     width: 100%;
     height: 200px;
     border-bottom: 2px solid gray;
 }
-.mds-menubar-list{
+.mds-drawermenubar-list{
     width: 100%;
     height: 100px;
 }
-.mds-menubar-listitem{
+.mds-drawermenubar-listitem{
     width: 100%;
     height: 60px;
     padding-left: 25px;
@@ -234,17 +234,17 @@ p{
     border: 1px solid black;
 } */
 
-.mds-menubar-listitem:hover{
+.mds-drawermenubar-listitem:hover{
     background-color: lightgray;
     color: #003366;
 }
-.mds-menubar-titleText{
+.mds-drawermenubar-titleText{
     font-size: 20px;
     padding-left: 25px;
     padding-top: 84px;
     margin: 0;
 }
-.mds-menubar-titleInfo{
+.mds-drawermenubar-titleInfo{
     padding-left: 25px;
     margin-top: 8px;
 }
