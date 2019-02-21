@@ -10,12 +10,6 @@ const menubarListitem = document.querySelectorAll(".mds-menubar-listitem");
 const statsScreen = document.querySelector(".mds-stats");
 const aboutScreen = document.querySelector(".mds-about");
 let headTitle = document.querySelector(".mds-header-text");
-let stats = {
-    gamesplayed: "",
-    correctanswers: "",
-    incorrectanswer: "",
-    correctpercentage: "",
-}
 
 // Variables declared
 let gamesPlayed = 0;
@@ -27,7 +21,7 @@ let allCorrectAnswer = [];
 let playerAnswer = [];
 let numOfCorrectAnswer = 0;
 
-//------------Main screen------------// 
+//------------Start of Main screen------------// 
 // Event listner for START QUIZ button
 startQuizBtn.addEventListener("click", () => {
     startQuizBtn.classList.add("mds-display-none");
@@ -36,7 +30,7 @@ startQuizBtn.addEventListener("click", () => {
 })
 //------------End of Main screen------------//
 
-//------------Quiz screen------------// 
+//------------Start of Quiz screen------------// 
 // Fetching data from api
 function getRequest() {
     let xml = new XMLHttpRequest
@@ -69,7 +63,7 @@ function renderQuiz(parsedData) {
         numberQuestion.textContent = "Q" + (i + 1) + ".";
         quizBody.appendChild(numberQuestion);
 
-        // Display category
+        // Display category to each question
         let category = arrayData[i].category;
         let categoryText = document.createElement("h3");
         categoryText.className = "categoryClass";
@@ -159,7 +153,7 @@ function checkAnswer() {
 }
 //------------End of Quiz screen------------//
 
-//------------Modal------------// 
+//------------Start of Modal------------// 
 function modalFunction() {
     modalContainer.classList.remove("mds-display-none")
     container.style.backgroundColor = "#ADADAD";
@@ -175,17 +169,12 @@ function closeModalFunction() {
     clearHtmlFunction()
     drawerMenuBtn.dataset.click = "inactive"
     startQuizBtn.classList.remove("mds-display-none")
-
 }
+
 function restartModalFunction() {
-    savePlayerStats();
-    numOfCorrectAnswer = 0;
     clearHtmlFunction();
-    allCorrectAnswer = [];
-    playerAnswer = [];
     getRequest();
 }
-//------------End of Modal------------// 
 
 // Clear all html to go back to quiz screen after clicking RE-START and CLOSE button from modal
 function clearHtmlFunction() {
@@ -195,24 +184,9 @@ function clearHtmlFunction() {
     modalContainer.classList.add("mds-display-none");
     container.style.backgroundColor = "#fff"; // Change the color white because after clicking RE-START and CLOSE button you get the gray screen
 }
+//------------End of Modal------------// 
 
-// Save stats from game in a object.
-function savePlayerStats() {
-    gamesPlayed = gamesPlayed + 1
-    allCorrect = allCorrect + numOfCorrectAnswer;
-    percentage = percentage + (allCorrect / (10 * gamesPlayed));
-    numberOfWrong = numberOfWrong + (10 - numOfCorrectAnswer);
-
-    stats = {
-        gamesplayed: gamesPlayed,
-        correctanswers: allCorrect,
-        incorrectanswer: numberOfWrong,
-        correctpercentage: percentage,
-    }
-    numOfCorrectAnswer = 0;
-}
-
-//------------Drawer Screen ------------// 
+//------------Start of Drawer Screen ------------// 
 drawerMenuBtn.addEventListener("click", drawerMenuFunction);
 function drawerMenuFunction() {
     if (drawerMenuBtn.dataset.click === "active") {
@@ -241,8 +215,8 @@ function drawerMenuFunction() {
             drawerMenuBtn.dataset.click = "active"
         }
     }
-
 }
+
 for (let bar of menubarListitem) {
     bar.addEventListener("click", function (e) {
         if (e.target.innerHTML === "Game screen") {
@@ -261,7 +235,7 @@ for (let bar of menubarListitem) {
 }
 //------------End of Drawer Screen ------------// 
 
-//------------Stats screen ------------// 
+//------------Start of Stats screen ------------// 
 function statsFunction() {
     quizBody.classList.add("mds-display-none")
     startQuizBtn.classList.add("mds-display-none");
@@ -269,19 +243,12 @@ function statsFunction() {
     container.style.backgroundColor = "#fff";
     drawerMenuBtn.dataset.click = "active"
     headTitle.innerHTML = "Stats";
-    statsScreen.classList.remove("mds-display-none")
-    renderStats();
+    statsScreen.classList.remove("mds-display-none");
     menuBar.style.width = "0px";
-}
-function renderStats() {
-    document.querySelector(".mds-stats-text--played").innerHTML = (stats.gamesplayed);
-    document.querySelector(".mds-stats-text--correct").innerHTML = (stats.correctanswers);
-    document.querySelector(".mds-stats-text--incorrect").innerHTML = (stats.incorrectanswer);
-    document.querySelector(".mds-stats-text--percentage").innerHTML = (stats.correctpercentage) * 100 + "%";
 }
 //------------End of Stats screen ------------//
 
-//------------About screen ------------//
+//------------Start of About screen ------------//
 function aboutFunction() {
     headTitle.innerHTML = "About this app";
     quizBody.classList.add("mds-display-none")

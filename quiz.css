@@ -36,6 +36,10 @@ body{
     position: absolute;
     left: 10px;
 }
+.mds-menu-icon:hover{
+    transform: scale(1.2);
+    color: #003366;
+}
 .mds-header-text{
     font-weight: bold;
     font-size: 24px;
@@ -68,7 +72,7 @@ body{
 }
 .mds-start-button:hover{
     background-color: lightslategray;
-    color: white;
+    color: #003366;
 }
 .mds-done-button{
     left: 42%;
@@ -87,7 +91,7 @@ body{
 }
 .mds-done-button:hover{
     background-color: lightslategray;
-    color: white;
+    color: #003366;
 }
 .mds-display-none{
     display: none;
@@ -166,7 +170,7 @@ p{
     border-radius: 10px;
     position: absolute;
     top: 263px;
-    left: 38px;
+    left: 100px;
 }
 .mds-modal-title{
     font-size: 21px;
@@ -189,6 +193,10 @@ p{
     margin-right: 20px;
     margin-top: 13px;
     cursor: pointer;
+}
+.mds-modalChoice-restartBtn:hover, .mds-modalChoice-closeBtn:hover{
+    transform: scale(1.1);
+    color: #003366;
 }
 
 .mds-menubar{
@@ -227,15 +235,16 @@ p{
 } */
 
 .mds-menubar-listitem:hover{
-    background-color: lightgray; 
+    background-color: lightgray;
+    color: #003366;
 }
-.mds-menubar-title-text{
+.mds-menubar-titleText{
     font-size: 20px;
     padding-left: 25px;
     padding-top: 84px;
     margin: 0;
 }
-.mds-menubar-title-info{
+.mds-menubar-titleInfo{
     padding-left: 25px;
     margin-top: 8px;
 }
