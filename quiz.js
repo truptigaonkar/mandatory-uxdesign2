@@ -1,31 +1,25 @@
-const startQuizBtn = document.querySelector(".mds-start-button");
-const quizBody = document.querySelector(".mds-scroll-main");
-const modalContainer = document.querySelector(".mds-modal");
-const container = document.querySelector(".mds-container");
-
-// Menu items and subitems
-const drawerMenuBtn = document.querySelector(".mds-menu-icon ");
-const menuBar = document.querySelector(".mds-menubar");
-const menubarListitem = document.querySelectorAll(".mds-menubar-listitem");
-const statsScreen = document.querySelector(".mds-stats");
-const aboutScreen = document.querySelector(".mds-about");
-let headTitle = document.querySelector(".mds-header-text");
-
 // Variables declared
 let gamesPlayed = 0;
-let numberOfWrong = 0;
-let percentage = 0;
+let incorrectAnswer = 0;
+let correctPercentage = 0;
 let allCorrect = 0;
 let count = 1;
 let allCorrectAnswer = [];
 let playerAnswer = [];
 let numOfCorrectAnswer = 0;
 
+// Main screen, Quiz screen: Selectors declared
+let startQuizBtn = document.querySelector(".mds-start-button");
+let quizBody = document.querySelector(".mds-scroll-main");
+let modalContainer = document.querySelector(".mds-modal");
+let container = document.querySelector(".mds-container");
+
 //------------Start of Main screen------------// 
 // Event listner for START QUIZ button
 startQuizBtn.addEventListener("click", () => {
     startQuizBtn.classList.add("mds-display-none");
-    quizBody.dataset.type = "active"
+    quizBody.dataset.type = "active";
+    console.log("Game starts!");
     getRequest();
 })
 //------------End of Main screen------------//
@@ -43,6 +37,10 @@ function getRequest() {
 function getParse() {
     let parsedData = JSON.parse(this.responseText);
     console.log(parsedData.results);
+    // logging all correct answers on console
+    for (let q of parsedData.results){
+    console.log("Correct answer: " +q.correct_answer);
+    }
     renderQuiz(parsedData);
 }
 
@@ -51,6 +49,7 @@ function renderQuiz(parsedData) {
     let answer = [];
     let quizHeadline = document.createElement("h3");
     quizHeadline.innerHTML = "Quiz " + (gamesPlayed + 1);
+    console.log(quizHeadline.innerHTML);
     quizHeadline.style.color = "#003366";
     quizBody.appendChild(quizHeadline);
     let arrayData = parsedData.results;
@@ -174,6 +173,21 @@ function closeModalFunction() {
 function restartModalFunction() {
     clearHtmlFunction();
     getRequest();
+
+    // Stats screen update
+    gamesPlayed = gamesPlayed + 1
+    allCorrect = allCorrect + numOfCorrectAnswer;
+    correctPercentage = correctPercentage + (allCorrect / (10 * gamesPlayed));
+    incorrectAnswer = incorrectAnswer + (10 - numOfCorrectAnswer);
+    stats = {
+        gamesplayed: gamesPlayed,
+        correctanswers: allCorrect,
+        incorrectanswer: incorrectAnswer,
+        correctpercentage: correctPercentage,
+    }
+    numOfCorrectAnswer = 0;
+    allCorrectAnswer = [];
+    playerAnswer = []; 
 }
 
 // Clear all html to go back to quiz screen after clicking RE-START and CLOSE button from modal
@@ -187,6 +201,21 @@ function clearHtmlFunction() {
 //------------End of Modal------------// 
 
 //------------Start of Drawer Screen ------------// 
+
+// Drawer screen: Selectors declared
+let drawerMenuBtn = document.querySelector(".mds-menu-icon ");
+let menuBar = document.querySelector(".mds-menubar");
+let menubarListitem = document.querySelectorAll(".mds-menubar-listitem");
+let statsScreen = document.querySelector(".mds-stats");
+let aboutScreen = document.querySelector(".mds-about");
+let headTitle = document.querySelector(".mds-header-text");
+let stats = {
+    gamesplayed: "",
+    correctanswers: "",
+    incorrectanswer: "",
+    correctpercentage: "",
+}
+// Drawer button event listener
 drawerMenuBtn.addEventListener("click", drawerMenuFunction);
 function drawerMenuFunction() {
     if (drawerMenuBtn.dataset.click === "active") {
@@ -216,7 +245,7 @@ function drawerMenuFunction() {
         }
     }
 }
-
+// Allow to click each drawer menu item
 for (let bar of menubarListitem) {
     bar.addEventListener("click", function (e) {
         if (e.target.innerHTML === "Game screen") {
@@ -245,6 +274,11 @@ function statsFunction() {
     headTitle.innerHTML = "Stats";
     statsScreen.classList.remove("mds-display-none");
     menuBar.style.width = "0px";
+    // Rendering stats
+    document.querySelector(".mds-stats-text--played").innerHTML = (stats.gamesplayed);
+    document.querySelector(".mds-stats-text--correct").innerHTML = (stats.correctanswers);
+    document.querySelector(".mds-stats-text--incorrect").innerHTML = (stats.incorrectanswer);
+    document.querySelector(".mds-stats-text--percentage").innerHTML = (stats.correctpercentage) * 100 + "%"; 
 }
 //------------End of Stats screen ------------//
 
