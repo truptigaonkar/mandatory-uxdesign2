@@ -163,6 +163,22 @@ function modalFunction() {
     container.style.backgroundColor = "#ADADAD";
     let dialogtext = document.querySelector(".mds-modal-description");
     dialogtext.innerHTML = "You answered " + numOfCorrectAnswer + "/10 questions correct!";
+    // Various types of messages on popup
+    let modalTitle = document.querySelector(".mds-modal-title");
+    if (numOfCorrectAnswer <= 1){
+        modalTitle.textContent = "Unlucky!"
+        modalTitle.style.color = "red"
+    }
+    else if (numOfCorrectAnswer >1 && numOfCorrectAnswer <= 8 ){
+        modalTitle.textContent = "Try Harder!"
+        modalTitle.style.color = "Orange"
+    }
+    else if (numOfCorrectAnswer >8 && numOfCorrectAnswer <= 10){
+        modalTitle.textContent = "Congratulations!"
+        modalTitle.style.color = "green"
+    }
+    
+
     let closeButton = document.querySelector(".mds-modalChoice-closeBtn")
     let restartQuizBtn = document.querySelector(".mds-modalChoice-restartBtn");
     closeButton.addEventListener("click", closeModalFunction);
