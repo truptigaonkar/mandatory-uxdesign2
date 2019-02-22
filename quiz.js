@@ -41,8 +41,8 @@ function getParse() {
     let parsedData = JSON.parse(this.responseText);
     console.log(parsedData.results);
     // logging all correct answers on console
-    for (let q of parsedData.results){
-    console.log("Correct answer: " +q.correct_answer);
+    for (let q of parsedData.results) {
+        console.log("Correct answer: " + q.correct_answer);
     }
     renderQuiz(parsedData);
 }
@@ -163,21 +163,21 @@ function modalFunction() {
     container.style.backgroundColor = "#ADADAD";
     let dialogtext = document.querySelector(".mds-modal-description");
     dialogtext.innerHTML = "You answered " + numOfCorrectAnswer + "/10 questions correct!";
-    // Various types of messages on popup
+    // Various types of messages on popup which depends on number of right answers
     let modalTitle = document.querySelector(".mds-modal-title");
-    if (numOfCorrectAnswer <= 1){
+    if (numOfCorrectAnswer <= 1) {
         modalTitle.textContent = "Unlucky!"
         modalTitle.style.color = "red"
     }
-    else if (numOfCorrectAnswer >1 && numOfCorrectAnswer <= 8 ){
+    else if (numOfCorrectAnswer > 1 && numOfCorrectAnswer <= 8) {
         modalTitle.textContent = "Try Harder!"
         modalTitle.style.color = "Orange"
     }
-    else if (numOfCorrectAnswer >8 && numOfCorrectAnswer <= 10){
+    else if (numOfCorrectAnswer > 8 && numOfCorrectAnswer <= 10) {
         modalTitle.textContent = "Congratulations!"
         modalTitle.style.color = "green"
     }
-    
+
 
     let closeButton = document.querySelector(".mds-modalChoice-closeBtn")
     let restartQuizBtn = document.querySelector(".mds-modalChoice-restartBtn");
@@ -186,14 +186,26 @@ function modalFunction() {
 }
 
 function closeModalFunction() {
-    clearHtmlFunction()
+    // Clear all html to go back to quiz screen after clicking RE-START and CLOSE button from modal
+    while (quizBody.firstChild) {
+        quizBody.removeChild(quizBody.firstChild);
+    }
+    modalContainer.classList.add("mds-display-none");
+    container.style.backgroundColor = "#fff"; // Change the color white because after clicking RE-START and CLOSE button you get the gray screen
+
     drawerMenuBtn.dataset.click = "inactive"
     startQuizBtn.classList.remove("mds-display-none");
     console.log("Closed Quiz. Start again quiz.....");
 }
 
 function restartModalFunction() {
-    clearHtmlFunction();
+    // Clear all html to go back to quiz screen after clicking RE-START and CLOSE button from modal
+    while (quizBody.firstChild) {
+        quizBody.removeChild(quizBody.firstChild);
+    }
+    modalContainer.classList.add("mds-display-none");
+    container.style.backgroundColor = "#fff"; // Change the color white because after clicking RE-START and CLOSE button you get the gray screen
+
     console.log("Restarted Quiz....");
     getRequest();
 
@@ -212,17 +224,9 @@ function restartModalFunction() {
     }
     numOfCorrectAnswer = 0;
     allCorrectAnswer = [];
-    playerAnswer = []; 
+    playerAnswer = [];
 }
 
-// Clear all html to go back to quiz screen after clicking RE-START and CLOSE button from modal
-function clearHtmlFunction() {
-    while (quizBody.firstChild) {
-        quizBody.removeChild(quizBody.firstChild);
-    }
-    modalContainer.classList.add("mds-display-none");
-    container.style.backgroundColor = "#fff"; // Change the color white because after clicking RE-START and CLOSE button you get the gray screen
-}
 //------------End of Modal------------// 
 
 //------------Start of Drawer Screen ------------// 
@@ -304,7 +308,7 @@ function statsFunction() {
     document.querySelector(".mds-stats-text--played").innerHTML = (stats.gamesplayed);
     document.querySelector(".mds-stats-text--correct").innerHTML = (stats.correctanswers);
     document.querySelector(".mds-stats-text--incorrect").innerHTML = (stats.incorrectanswer);
-    document.querySelector(".mds-stats-text--percentage").innerHTML = (stats.correctpercentage) * 100 + "%"; 
+    document.querySelector(".mds-stats-text--percentage").innerHTML = (stats.correctpercentage) * 100 + "%";
     document.querySelector(".mds-stats-text--average").innerHTML = (stats.average);
 }
 //------------End of Stats screen ------------//
